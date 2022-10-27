@@ -15,7 +15,7 @@ public:
     Ball(QGraphicsScene *scene);
     void move();
     void handleCollisions(QString wall);
-    void handleCollisions(QGraphicsEllipseItem *wheel, QPointF offset);
+    void handleCollisions(QGraphicsEllipseItem *wheel);
     void handleCollisions(QGraphicsPixmapItem *car);
     QGraphicsEllipseItem* model();
 };

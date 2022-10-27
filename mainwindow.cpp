@@ -7,11 +7,6 @@
 #include <QPen>
 #include <cmath>
 
-void normalize(QPointF &point){
-    qreal len=sqrt(point.x()*point.x()+point.y()*point.y());
-    point/=len;
-}
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -32,8 +27,10 @@ MainWindow::MainWindow(QWidget *parent) :
     man->setFlags(QGraphicsItem::ItemIsMovable);
     man->setPos(187,160);
     man->setData(0,"Man");
-    wheel1 = scene->addEllipse(169,254,25,25,QPen(Qt::black),QBrush(Qt::black));
-    wheel2 = scene->addEllipse(346,254,25,25,QPen(Qt::black),QBrush(Qt::black));
+    wheel1 = scene->addEllipse(0,0,25,25,QPen(Qt::black),QBrush(Qt::black));
+    wheel1->moveBy(169,254);
+    wheel2 = scene->addEllipse(0,0,25,25,QPen(Qt::black),QBrush(Qt::black));
+    wheel2->moveBy(346,254);
     wheel1->setFlags(QGraphicsItem::ItemIsMovable);
     wheel1->setData(0,"Wheel");
     wheel1->setData(1,"1");
@@ -63,8 +60,12 @@ void MainWindow::update(){
         if(it==ball->model()) continue;
         if(it->data(0)=="Wall") ball->handleCollisions(it->data(1).toString());
         else if(it->data(0)=="Wheel"){
-            if(it->data(1)=="1") ball->handleCollisions(wheel1,QPointF(169,254));
-            else if(it->data(1)=="2") ball->handleCollisions(wheel2,QPointF(346,254));
+            if(it->data(1)=="1"){
+                ball->handleCollisions(wheel1);
+            }
+            else if(it->data(1)=="2"){
+                ball->handleCollisions(wheel2);
+            }
         }
         else if(it->data(0)=="Car") ball->handleCollisions(car);
     }
