@@ -10,13 +10,14 @@ class Ball
     QGraphicsEllipseItem* _model;
     QVector2D *velocity;
     qreal scale;
+    qreal radius;
 public:
     Ball();
     Ball(QGraphicsScene *scene);
     void move();
     void handleCollisions(QString wall);
     void handleCollisions(QGraphicsEllipseItem *wheel);
-    void handleCollisions(QGraphicsPixmapItem *car);
+    void handleCollisions(QGraphicsPixmapItem *pix);
     QGraphicsEllipseItem* model();
 };
 

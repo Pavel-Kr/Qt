@@ -23,14 +23,14 @@ MainWindow::MainWindow(QWidget *parent) :
     car->setData(0,"Car");
     car->setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
     QPixmap pixMan("F:\\lab7_qt\\man.png");
-    man=scene->addPixmap(pixMan.scaled(100,75));
+    man=scene->addPixmap(pixMan.scaledToHeight(65));
+    man->setPos(220,177);
     man->setFlags(QGraphicsItem::ItemIsMovable);
-    man->setPos(187,160);
     man->setData(0,"Man");
     wheel1 = scene->addEllipse(0,0,25,25,QPen(Qt::black),QBrush(Qt::black));
-    wheel1->moveBy(169,254);
+    wheel1->setPos(169,254);
     wheel2 = scene->addEllipse(0,0,25,25,QPen(Qt::black),QBrush(Qt::black));
-    wheel2->moveBy(346,254);
+    wheel2->setPos(346,254);
     wheel1->setFlags(QGraphicsItem::ItemIsMovable);
     wheel1->setData(0,"Wheel");
     wheel1->setData(1,"1");
@@ -68,6 +68,7 @@ void MainWindow::update(){
             }
         }
         else if(it->data(0)=="Car") ball->handleCollisions(car);
+        else if(it->data(0)=="Man") ball->handleCollisions(man);
     }
 }
 
